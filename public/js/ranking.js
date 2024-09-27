@@ -1,19 +1,41 @@
-document.getElementById('refreshBtn').addEventListener('click', async function() {
-    showNotification("Aguarde enquanto os itens são enviados...", "info");
+// Função para carregar o ranking
+async function loadRanking() {
+    showNotification("Carregando ranking...", "info");
 
     try {
-        const response = await fetch(`/api/getValue/App Fecarte`);
-        console.log("response ranking")
-        console.log(response)
-
+        const response = await fetch(`/api/getRanking`);
         const data = await response.json();
-        console.log("data ranking")
-        console.log(data);
+
+        // Ordenando o ranking por pontos (dataPts)
+        const sortedRanking = Object.values(data).sort((a, b) => b.dataPts - a.dataPts);
+
+        // Exibindo o ranking
+        const rankingContainer = document.createElement('div');
+        rankingContainer.classList.add('ranking-container');
+
+        sortedRanking.forEach((user, index) => {
+            const rankingItem = document.createElement('div');
+            rankingItem.classList.add('ranking-item');
+            rankingItem.innerHTML = `#${index + 1} ${user.dataName} - ${user.dataPts} Pontos`;
+            rankingContainer.appendChild(rankingItem);
+        });
+
+        // Adicionando o ranking ao container
+        const container = document.querySelector('.container');
+        const existingRanking = document.querySelector('.ranking-container');
+        if (existingRanking) existingRanking.remove();  // Removendo ranking anterior
+        container.appendChild(rankingContainer);
+        showNotification("Ranking atualizado com sucesso!", "success");
+
     } catch (error) {
         showNotification("Erro: " + error.message, "error");
-        console.error(error)
+        console.error(error);
     }
-});
+}
+
+// Executa quando a página é carregada
+document.addEventListener('DOMContentLoaded', loadRanking);
+document.getElementById('refreshBtn').addEventListener('click', loadRanking);
 
 function showNotification(message, type) {
     const notification = document.getElementById('notification');
