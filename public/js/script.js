@@ -34,7 +34,7 @@ document.getElementById('submitBtn').addEventListener('click', async function() 
             const result = { id, data: components };
 
             // Faz a atualização dos itens
-            const response = await fetch('/api/updateValue', {
+            await fetch('/api/updateValue', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -60,6 +60,7 @@ document.getElementById('submitBtn').addEventListener('click', async function() 
         }
     } catch (error) {
         showNotification("Erro: " + error.message, "error");
+        console.error(error)
     }
 });
 

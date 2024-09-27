@@ -33,12 +33,9 @@ document.getElementById('submitBtn').addEventListener('click', async function() 
         });
 
         if (id && components.length > 0 && components.every(comp => comp.item && comp.quantity > 0)) {
-            const existingData = response;
-            const updatedItems = existingData?.itens ? [...existingData.itens, ...data] : data;
-
+            const updatedItems = response?.itens ? [...response.itens, ...components] : components;
             const result = { id, data: updatedItems };
-
-            // Faz a atualização dos itens
+            console.log(result)
             await fetch('/api/updateValue', {
                 method: 'POST',
                 headers: {
@@ -48,6 +45,7 @@ document.getElementById('submitBtn').addEventListener('click', async function() 
             });
 
             const dataInfos = { id, dataEmail: email, dataName: nome, dataPhone: id, dataPts: pontos }
+            console.log(dataInfos)
             await fetch('/api/createUser', {
                 method: 'POST',
                 headers: {
@@ -74,6 +72,7 @@ document.getElementById('submitBtn').addEventListener('click', async function() 
         }
     } catch (error) {
         showNotification("Erro: " + error.message, "error");
+        console.error(error)
     }
 });
 
