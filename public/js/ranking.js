@@ -16,7 +16,22 @@ async function loadRanking() {
         sortedRanking.forEach((user, index) => {
             const rankingItem = document.createElement('div');
             rankingItem.classList.add('ranking-item');
-            rankingItem.innerHTML = `#${index + 1} ${user.dataName} - ${user.dataPts} Pontos`;
+
+            const position = document.createElement('div');
+            position.className = 'position';
+            position.textContent = `#${index + 1}`;
+
+            const name = document.createElement('div');
+            name.className = 'name';
+            name.textContent = user.dataName;
+
+            const points = document.createElement('div');
+            points.className = 'points';
+            points.textContent = `${user.dataPts} Pontos`;
+
+            rankingItem.appendChild(position);
+            rankingItem.appendChild(name);
+            rankingItem.appendChild(points);
             rankingContainer.appendChild(rankingItem);
         });
 
