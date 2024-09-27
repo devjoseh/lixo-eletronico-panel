@@ -23,18 +23,12 @@
 import { getValue, updateValue } from '../lib/functions';
 
 export default async function handler(req, res) {
+    console.log('Request Body:', req.body); // Adicione esta linha
     const { path, data } = req.body;
 
     try {
-
         const existingData = await getValue(`${path}`, null);
-
-        let updatedItems;
-        if (existingData && existingData.itens) {
-            updatedItems = [...existingData.itens, ...data];
-        } else {
-            updatedItems = data;
-        }
+        const updatedItems = existingData?.itens ? [...existingData.itens, ...data] : data;
 
         await updateValue(`${path}`, { itens: updatedItems });
         res.json({ message: 'Itens adicionados com sucesso!' });
