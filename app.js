@@ -7,6 +7,10 @@ import { getValue, updateValue } from './public/database/functions.js';
 app.use(express.static('public'));
 app.use(express.json());
 
+app.get("/", (req, res) => {
+	res.sendFile(path.join(__dirname, "public", "index.html"));
+})
+
 // Buscar Valor
 app.get('/api/getValue/:id', async (req, res) => {
     try {
