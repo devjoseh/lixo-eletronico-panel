@@ -34,14 +34,19 @@ document.getElementById('submitBtn').addEventListener('click', async function() 
             const path = `App Fecarte/${id}/`
             const result = { path, data: components };
 
+            console.log(result)
+
             // Faz o envio dos dados para o banco
-            await fetch('/api/updateValue', {
+            const response = await fetch('/api/updateValue', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(result)
             });
+            
+            const responseBody = await response.json();
+            console.log('Resposta do servidor:', responseBody);
 
             showNotification("Dados enviados com sucesso!", "success");
 
