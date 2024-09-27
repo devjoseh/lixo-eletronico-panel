@@ -34,10 +34,11 @@ document.getElementById('submitBtn').addEventListener('click', async function() 
         });
 
         if (id && components.length > 0 && components.every(comp => comp.item && comp.quantity > 0)) {
+            console.log("Info add.js")
             console.log(response)
             const updatedItems = response?.itens ? [...response.itens, ...components] : components;
             const result = { id, data: updatedItems };
-            console.log(result)
+
             await fetch('/api/updateValue', {
                 method: 'POST',
                 headers: {
@@ -47,7 +48,7 @@ document.getElementById('submitBtn').addEventListener('click', async function() 
             });
 
             const dataInfos = { id, dataEmail: email, dataName: nome, dataPhone: id, dataPts: pontos }
-            console.log(dataInfos)
+            
             await fetch('/api/createUser', {
                 method: 'POST',
                 headers: {

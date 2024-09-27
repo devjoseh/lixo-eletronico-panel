@@ -7,7 +7,7 @@ export default async function handler(req, res) {
         if (!path) {
             return res.status(400).json({ message: 'Caminho não especificado' });
         }
-        console.log(path)
+        console.log("Caminho solicitado", path)
 
         const userInfo = await getValue(`${path}`, null);
         if (!userInfo) {
