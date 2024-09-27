@@ -3,7 +3,7 @@ async function loadRanking() {
     showNotification("Carregando ranking...", "info");
 
     try {
-        const response = await fetch(`/api/getRanking`);
+        const response = await fetch(`/api/getRanking/`);
         const data = await response.json();
 
         // Ordenando o ranking por pontos (dataPts)

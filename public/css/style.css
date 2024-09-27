@@ -112,26 +112,50 @@ button:hover {
 }
 
 .ranking-container {
-    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    margin: 20px auto;
 }
 
+/* Estilização dos itens do ranking */
 .ranking-item {
-    background-color: #e0e0e0;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, #007BFF, #00C6FF);
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+    color: #ffffff;
     font-size: 18px;
     font-weight: bold;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
 }
 
-.ranking-item:nth-child(odd) {
-    background-color: #d0d0d0;
+/* Estilo do ranking ao hover */
+.ranking-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.3);
 }
 
-@media (max-width: 600px) {
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
     .ranking-item {
         font-size: 16px;
-        padding: 8px;
+        padding: 12px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .ranking-item {
+        font-size: 14px;
+        padding: 10px 12px;
     }
 }
