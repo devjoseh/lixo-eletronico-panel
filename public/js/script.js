@@ -31,8 +31,7 @@ document.getElementById('submitBtn').addEventListener('click', async function() 
         });
 
         if (id && components.length > 0 && components.every(comp => comp.item && comp.quantity > 0)) {
-            const path = `App Fecarte/${id}/`
-            const result = { path, data: components };
+            const result = { id, data: components };
 
             console.log(result)
 
