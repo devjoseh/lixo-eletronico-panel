@@ -1,14 +1,14 @@
 import { getValue } from '../lib/functions.js';
 
 export default async function handler(req, res) {
-    const { id } = req.query;
+    const { path } = req.query;
 
     try {
-        if (!id) {
-            return res.status(400).json({ message: 'ID não fornecido' });
+        if (!path) {
+            return res.status(400).json({ message: 'Caminho não especificado' });
         }
 
-        const userInfo = await getValue(`App Fecarte/${id}`, null);
+        const userInfo = await getValue(`${path}`, null);
         if (!userInfo) {
             return res.status(404).json({ message: 'Usuário não encontrado' });
         }

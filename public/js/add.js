@@ -24,7 +24,8 @@ document.getElementById('submitBtn').addEventListener('click', async function() 
 
     try {
         // Verifica se o usuário existe no bd
-        const response = await fetch(`/api/getValue/?id=${id}`);
+        // const response = await fetch(`/api/getValue/App Fecarte/${id}`);
+        const response = await fetch(`/api/getValue/?path=App Fecarte/${id}`);
 
         const components = Array.from(document.querySelectorAll('.component')).map(component => {
             const name = component.querySelector('.componentName').value;
