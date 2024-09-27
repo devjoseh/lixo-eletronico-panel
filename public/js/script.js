@@ -33,9 +33,7 @@ document.getElementById('submitBtn').addEventListener('click', async function() 
         if (id && components.length > 0 && components.every(comp => comp.item && comp.quantity > 0)) {
             const result = { id, data: components };
 
-            console.log(result)
-
-            // Faz o envio dos dados para o banco
+            // Faz a atualização dos itens
             const response = await fetch('/api/updateValue', {
                 method: 'POST',
                 headers: {
@@ -43,9 +41,6 @@ document.getElementById('submitBtn').addEventListener('click', async function() 
                 },
                 body: JSON.stringify(result)
             });
-            
-            const responseBody = await response.json();
-            console.log('Resposta do servidor:', responseBody);
 
             showNotification("Dados enviados com sucesso!", "success");
 

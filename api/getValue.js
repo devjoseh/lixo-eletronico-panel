@@ -1,7 +1,7 @@
 import { getValue } from '../lib/functions.js';
 
 export default async function handler(req, res) {
-    const { id } = req.query; // Obtem o ID da query
+    const { id } = req.query;
 
     try {
         if (!id) {
