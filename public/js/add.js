@@ -34,6 +34,7 @@ document.getElementById('submitBtn').addEventListener('click', async function() 
         });
 
         if (id && components.length > 0 && components.every(comp => comp.item && comp.quantity > 0)) {
+            console.log(response)
             const updatedItems = response?.itens ? [...response.itens, ...components] : components;
             const result = { id, data: updatedItems };
             console.log(result)
