@@ -13,6 +13,18 @@ async function loadRanking() {
         const rankingContainer = document.createElement('div');
         rankingContainer.classList.add('ranking-container');
 
+        const rankingHeader = document.createElement('div');
+        rankingHeader.className = 'ranking-header';
+        const headers = ['Posição', 'Nome', 'Pontos'];
+
+        headers.forEach(header => {
+            const headerItem = document.createElement('div');
+            headerItem.className = 'header-item';
+            headerItem.textContent = header;
+            rankingHeader.appendChild(headerItem);
+        });
+        rankingContainer.appendChild(rankingHeader);
+
         sortedRanking.forEach((user, index) => {
             const rankingItem = document.createElement('div');
             rankingItem.classList.add('ranking-item');
