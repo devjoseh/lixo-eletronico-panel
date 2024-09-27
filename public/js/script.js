@@ -20,8 +20,8 @@ document.getElementById('submitBtn').addEventListener('click', async function() 
     showNotification("Aguarde enquanto os itens são enviados...", "info");
 
     try {
-        // Verifica se o usuário existe no bd
-        const response = await fetch(`/api/getValue/${id}`);
+        // Verifica se o usuário existe no bd usando o parâmetro de consulta
+        const response = await fetch(`/api/getValue?id=${id}`);
         if (!response.ok) throw new Error('Usuário não encontrado');
 
         const components = Array.from(document.querySelectorAll('.component')).map(component => {

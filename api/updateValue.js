@@ -1,4 +1,4 @@
-import { getValue, updateValue } from '../lib/functions.js';
+import { getValue, updateValue } from '../lib/functions';
 
 export default async function handler(req, res) {
     const { path, data } = req.body;

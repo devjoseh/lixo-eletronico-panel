@@ -1,4 +1,4 @@
-import { getValue } from '../lib/functions.js';
+import { getValue } from '../lib/functions';
 
 export default async function handler(req, res) {
     const { id } = req.query;
