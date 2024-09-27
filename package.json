@@ -1,0 +1,16 @@
+{
+  "name": "add_itens_lixo_eletronico",
+  "version": "1.0.0",
+  "main": "app.js",
+  "type": "module",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "MIT",
+  "description": "Site feito para adicionar os componentes ao banco de dados",
+  "dependencies": {
+    "express": "^4.21.0",
+    "firebase": "^10.13.2"
+  }
+}

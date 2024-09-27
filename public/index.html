@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Componentes</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/alert.css">
+</head>
+<body>
+    <div id="notification" class="notification hidden"></div>
+    <div class="container">
+        <h1>Cadastro de Componentes</h1>
+        <h2>FECARTE 2024 - Lixo Eletrônico</h2>
+        <div class="form-group">
+            <label for="idInput">ID (telefone) da pessoa:</label>
+            <input type="text" id="idInput" required>
+        </div>
+        <div id="componentsContainer">
+            <div class="component">
+                <input type="text" placeholder="Nome do Componente" class="componentName" required>
+                <input type="number" placeholder="Quantidade" class="componentQuantity" required>
+                <button class="removeBtn">Remover</button>
+            </div>
+        </div>
+        <button id="addComponentBtn">Adicionar Componente</button>
+        <button id="submitBtn">Enviar</button>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>
