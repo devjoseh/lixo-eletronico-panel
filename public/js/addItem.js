@@ -18,6 +18,7 @@ document.getElementById('addComponentBtn').addEventListener('click', function() 
 
 document.getElementById('submitBtn').addEventListener('click', async function() {
     const id = document.getElementById('idInput').value;
+    const pontos = document.getElementById('pointsInput').value;
 
     showNotification("Aguarde enquanto os itens são registrados...", "info");
 
@@ -34,7 +35,7 @@ document.getElementById('submitBtn').addEventListener('click', async function() 
         });
 
         // Verifica se todos os campos foram preenchidos
-        if (id && components.length > 0 && components.every(comp => comp.item && comp.quantity > 0)) {
+        if (id && !pontos && components.length > 0 && components.every(comp => comp.item && comp.quantity > 0)) {
             const result = { id, data: components };
 
             // Faz a atualização dos itens
@@ -50,6 +51,32 @@ document.getElementById('submitBtn').addEventListener('click', async function() 
 
             // Limpa todos os campos
             document.getElementById('idInput').value = '';
+            document.getElementById('pointsInput').value = '';
+            const componentsContainer = document.getElementById('componentsContainer');
+            const componentInputs = componentsContainer.querySelectorAll('.component');
+
+            componentInputs.forEach(component => {
+                component.querySelector('.componentName').value = '';
+                component.querySelector('.componentQuantity').value = '';
+            });
+
+            componentsContainer.innerHTML = '';
+        } else if (id && pontos) {
+            const result = { id, points: pontos };
+
+            await fetch('/api/addPoints', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(result)
+            });
+
+            showNotification("Pontos adicionados com sucesso!", "success");
+
+            // Limpa todos os campos
+            document.getElementById('idInput').value = '';
+            document.getElementById('pointsInput').value = '';
             const componentsContainer = document.getElementById('componentsContainer');
             const componentInputs = componentsContainer.querySelectorAll('.component');
 
