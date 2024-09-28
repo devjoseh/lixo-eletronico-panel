@@ -1,3 +1,5 @@
+import { showNotification } from './notifications.js';
+
 document.getElementById('addComponentBtn').addEventListener('click', function() {
     const componentsContainer = document.getElementById('componentsContainer');
     const newComponent = document.createElement('div');
@@ -17,20 +19,21 @@ document.getElementById('addComponentBtn').addEventListener('click', function() 
 document.getElementById('submitBtn').addEventListener('click', async function() {
     const id = document.getElementById('idInput').value;
 
-    showNotification("Aguarde enquanto os itens são enviados...", "info");
+    showNotification("Aguarde enquanto os itens são registrados...", "info");
 
     try {
-        // Verifica se o usuário existe no bd
-        // const response = await fetch(`/api/getValue/?id=${id}`);
+        // Verifica se o usuário existe no bd. Se não existir, retorna erro
         const response = await fetch(`/api/getValue/?path=App Fecarte/${id}`);
         if (!response.ok) throw new Error('Usuário não encontrado');
 
+        // Cria o objeto com todos os itens
         const components = Array.from(document.querySelectorAll('.component')).map(component => {
             const name = component.querySelector('.componentName').value;
             const quantity = component.querySelector('.componentQuantity').value;
             return { item: name, quantity: Number(quantity) };
         });
 
+        // Verifica se todos os campos foram preenchidos
         if (id && components.length > 0 && components.every(comp => comp.item && comp.quantity > 0)) {
             const result = { id, data: components };
 
@@ -64,17 +67,3 @@ document.getElementById('submitBtn').addEventListener('click', async function() 
         console.error(error)
     }
 });
-
-function showNotification(message, type) {
-    const notification = document.getElementById('notification');
-    notification.textContent = message;
-    notification.className = `notification show ${type}`;
-    notification.classList.remove('hidden');
-
-    setTimeout(() => {
-        notification.classList.remove('show');
-        setTimeout(() => {
-            notification.classList.add('hidden');
-        }, 500);
-    }, 3000);
-}

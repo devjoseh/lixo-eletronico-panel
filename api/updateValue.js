@@ -5,13 +5,7 @@ export default async function handler(req, res) {
 
     try {
         const existingData = await getValue(`App Fecarte/${id}`, null);
-
-        let updatedItems;
-        if (existingData && existingData.itens) {
-            updatedItems = [...existingData.itens, ...data];
-        } else {
-            updatedItems = data;
-        }
+        const updatedItems = existingData?.itens ? [...existingData.itens, ...data] : data;
 
         await updateValue(`App Fecarte/${id}`, { itens: updatedItems });
         res.json({ message: 'Itens adicionados com sucesso!' });

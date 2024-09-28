@@ -5,7 +5,7 @@ export default async function handler(req, res) {
 
     try {
         await updateValue(`App Fecarte/${id}`, { dataEmail, dataName, dataPhone, dataPts });
-        res.json({ message: 'Itens adicionados com sucesso!' });
+        res.json({ message: 'Descartador registrado com sucesso!' });
     } catch (error) {
         res.status(500).json({ message: 'Erro ao adicionar os itens', error });
     }

@@ -1,3 +1,5 @@
+import { showNotification } from './notifications.js';
+
 document.getElementById('addComponentBtn').addEventListener('click', function() {
     const componentsContainer = document.getElementById('componentsContainer');
     const newComponent = document.createElement('div');
@@ -23,32 +25,20 @@ document.getElementById('submitBtn').addEventListener('click', async function() 
     showNotification("Aguarde enquanto os itens são enviados...", "info");
 
     try {
-        // Verifica se o usuário existe no bd
-        // const response = await fetch(`/api/getValue/App Fecarte/${id}`);
+        // Busca o usuário no banco de dados
         const response = await fetch(`/api/getValue/?path=App Fecarte/${id}`);
 
+        // Cria o objeto com todos os itens
         const components = Array.from(document.querySelectorAll('.component')).map(component => {
             const name = component.querySelector('.componentName').value;
             const quantity = component.querySelector('.componentQuantity').value;
             return { item: name, quantity: Number(quantity) };
         });
 
-        if (id && components.length > 0 && components.every(comp => comp.item && comp.quantity > 0)) {
-            console.log("Info add.js")
-            console.log(response)
-            const updatedItems = response?.itens ? [...response.itens, ...components] : components;
-            const result = { id, data: updatedItems };
-
-            await fetch('/api/updateValue', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(result)
-            });
-
+        // Verifica se todos os campos foram preenchidos
+        if (id && email && nome && pontos && components.length > 0 && components.every(comp => comp.item && comp.quantity > 0)) {
+            // Cria o usuário no banco de dados
             const dataInfos = { id, dataEmail: email, dataName: nome, dataPhone: id, dataPts: pontos }
-            
             await fetch('/api/createUser', {
                 method: 'POST',
                 headers: {
@@ -57,7 +47,20 @@ document.getElementById('submitBtn').addEventListener('click', async function() 
                 body: JSON.stringify(dataInfos)
             });
 
-            showNotification("Dados enviados com sucesso!", "success");
+            // Verifica se o usuário já possui algum item. Se existir, apenas adiciona os novos, se não existir, cria
+            const updatedItems = response?.itens ? [...response.itens, ...components] : components;
+            const result = { id, data: updatedItems };
+
+            // Atualiza/cria os itens do usuario
+            await fetch('/api/updateValue', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(result)
+            });
+
+            showNotification("Registrador criado com sucesso!", "success");
 
             // Limpa todos os campos
             document.getElementById('idInput').value = '';
@@ -78,17 +81,3 @@ document.getElementById('submitBtn').addEventListener('click', async function() 
         console.error(error)
     }
 });
-
-function showNotification(message, type) {
-    const notification = document.getElementById('notification');
-    notification.textContent = message;
-    notification.className = `notification show ${type}`;
-    notification.classList.remove('hidden');
-
-    setTimeout(() => {
-        notification.classList.remove('show');
-        setTimeout(() => {
-            notification.classList.add('hidden');
-        }, 500);
-    }, 3000);
-}
