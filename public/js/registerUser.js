@@ -64,6 +64,9 @@ document.getElementById('submitBtn').addEventListener('click', async function() 
 
             // Limpa todos os campos
             document.getElementById('idInput').value = '';
+            document.getElementById('emailInput').value = '';
+            document.getElementById('nameInput').value = '';
+            document.getElementById('pointsInput').value = '';
             const componentsContainer = document.getElementById('componentsContainer');
             const componentInputs = componentsContainer.querySelectorAll('.component');
 
