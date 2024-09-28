@@ -65,3 +65,29 @@
     color: #28a745;
     font-weight: bold;
 }
+
+@media (max-width: 600px) {
+    #refreshBtn {
+        width: 90%; /* Botão ocupa 90% da largura em telas menores */
+        font-size: 16px; /* Aumenta o tamanho da fonte */
+    }
+
+    .ranking-header, .ranking-item {
+        flex-direction: column; /* Itens em coluna em vez de linha */
+        text-align: left; /* Alinhamento à esquerda */
+    }
+
+    .header-item, .ranking-item > div {
+        padding: 5px; /* Reduz o padding para economizar espaço */
+        text-align: left; /* Alinhamento à esquerda */
+    }
+
+    .ranking-item {
+        border-bottom: none; /* Remove a borda inferior em telas menores */
+        padding: 10px 5px; /* Ajusta o padding */
+    }
+
+    .ranking-header {
+        border-radius: 0; /* Remove bordas arredondadas em telas menores */
+    }
+}
