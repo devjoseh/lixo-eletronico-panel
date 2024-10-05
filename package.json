@@ -9,6 +9,7 @@
   "license": "MIT",
   "description": "Site feito para adicionar os componentes ao banco de dados",
   "dependencies": {
+    "dotenv": "^16.4.5",
     "express": "^4.21.0",
     "firebase": "^10.13.2"
   }
