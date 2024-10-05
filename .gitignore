@@ -4,3 +4,4 @@ package-lock.json
 cmd.bat
 start.bat
 .vercel
+.env
