@@ -1,16 +1,17 @@
-import { showNotification } from './notifications.js';
+import { showNotification } from '../utils/notifications.js';
 
 async function loadRanking() {
     showNotification("Carregando ranking...", "info");
 
     try {
+        // Puxa as informações de todos os usuários do banco de dados
         const response = await fetch(`/api/getRanking/`);
         const data = await response.json();
 
-        // Ordenando o ranking por pontos (dataPts)
+        // Ordena da maior quantidade de pontos para o menor
         const sortedRanking = Object.values(data).sort((a, b) => b.dataPts - a.dataPts);
 
-        // Exibindo o ranking
+        // Exibe o ranking
         const rankingContainer = document.createElement('div');
         rankingContainer.classList.add('ranking-container');
 
@@ -51,16 +52,16 @@ async function loadRanking() {
         // Adicionando o ranking ao container
         const container = document.querySelector('.container');
         const existingRanking = document.querySelector('.ranking-container');
-        if (existingRanking) existingRanking.remove();  // Removendo ranking anterior
+        if (existingRanking) existingRanking.remove();  // Remove o ranking anterior
         container.appendChild(rankingContainer);
-        showNotification("Ranking atualizado com sucesso!", "success");
 
+        showNotification("Ranking atualizado com sucesso!", "success");
     } catch (error) {
         showNotification("Erro: " + error.message, "error");
         console.error(error);
     }
 }
 
-// Executa quando a página é carregada
+// Carrega o ranking toda vez que a página é carregada
 document.addEventListener('DOMContentLoaded', loadRanking);
 document.getElementById('refreshBtn').addEventListener('click', loadRanking);
